@@ -140,7 +140,7 @@ partial class Build : NukeBuild
                 .SetFramework("netstandard2.0")
                 .AddProperty("Platform", "AnyCPU")
                 .CombineWith(
-                    new[] { "OSX", "Linux" },
+                    new[] { "OSX", "Linux", "FreeBSD" },
                     (_, os) => _.AddProperty("TargetOS", os)));
 
             DotNetPack(c => c

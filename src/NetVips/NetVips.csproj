@@ -18,6 +18,7 @@
 
   <!-- Give an initial value based on the operating system where it's currently running on. -->
   <PropertyGroup Condition="'$(TargetOS)' == ''">
+    <TargetOS Condition="$([MSBuild]::IsOSPlatform('FreeBSD'))">FreeBSD</TargetOS>
     <TargetOS Condition="$([MSBuild]::IsOSPlatform('Linux'))">Linux</TargetOS>
     <TargetOS Condition="$([MSBuild]::IsOSPlatform('OSX'))">OSX</TargetOS>
     <TargetOS Condition="$([MSBuild]::IsOSPlatform('Windows'))">Windows</TargetOS>
@@ -43,6 +44,10 @@
 
   <!-- Include .NET Standard packages on Linux and macOS -->
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)bin\$(Platform)\$(Configuration)\netstandard2.0\FreeBSD\$(AssemblyName).dll">
+      <Pack>true</Pack>
+      <PackagePath>runtimes\freebsd\lib\netstandard2.0</PackagePath>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)bin\$(Platform)\$(Configuration)\netstandard2.0\Linux\$(AssemblyName).dll">
       <Pack>true</Pack>
       <PackagePath>runtimes\linux\lib\netstandard2.0</PackagePath>
